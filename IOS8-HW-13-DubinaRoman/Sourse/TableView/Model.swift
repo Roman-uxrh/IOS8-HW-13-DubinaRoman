@@ -9,27 +9,27 @@ import UIKit
 
 struct Model {
     var image: String
-    var firstTitle: String
-    var secondTitle: String
+    var firstLabel: String
+    var secondLabel: String
 }
 
 extension Model {
-    static var model: [[Model]] = [
-        [Model(image: "image 1", firstTitle: "Авиарежим", secondTitle: ""),
-         Model(image: "image 2", firstTitle: "WI-FI", secondTitle: "Не подключено"),
-         Model(image: "image 3", firstTitle: "Bluetooth", secondTitle: "Вкл."),
-         Model(image: "image 4", firstTitle: "Сотовая связь", secondTitle: ""),
-         Model(image: "image 5", firstTitle: "Режим модема", secondTitle: ""),
-         Model(image: "image 6", firstTitle: "VPN", secondTitle: "")],
+    static let model: [[Model]] = [
+        [Model(image: "image 1", firstLabel: "Авиарежим", secondLabel: ""),
+         Model(image: "image 2", firstLabel: "Wi-Fi", secondLabel: "Не подключено"),
+         Model(image: "image 3", firstLabel: "Bluetooth", secondLabel: "Вкл."),
+         Model(image: "image 4", firstLabel: "Сотовая связь", secondLabel: ""),
+         Model(image: "image 5", firstLabel: "Режим модема", secondLabel: ""),
+         Model(image: "image 6", firstLabel: "VPN", secondLabel: "")],
         
-        [Model(image: "image 7", firstTitle: "Уведомления", secondTitle: ""),
-         Model(image: "image 8", firstTitle: "Звуки, тактильные сигналы", secondTitle: ""),
-         Model(image: "image 9", firstTitle: "Не беспокоить", secondTitle: ""),
-         Model(image: "image 10", firstTitle: "Экранное время", secondTitle: "")],
+        [Model(image: "image 7", firstLabel: "Уведомления", secondLabel: ""),
+         Model(image: "image 8", firstLabel: "Звуки, тактильные сигналы", secondLabel: ""),
+         Model(image: "image 9", firstLabel: "Не беспокоить", secondLabel: ""),
+         Model(image: "image 10", firstLabel: "Экранное время", secondLabel: "")],
         
-        [Model(image: "image 11", firstTitle: "Основные", secondTitle: ""),
-         Model(image: "image 12", firstTitle: "Пункт управления", secondTitle: ""),
-         Model(image: "image 13", firstTitle: "Экран и яркость", secondTitle: ""),
-         Model(image: "image 14", firstTitle: "Экран Домой", secondTitle: "")]
+        [Model(image: "image 11", firstLabel: "Основные", secondLabel: ""),
+         Model(image: "image 12", firstLabel: "Пункт управления", secondLabel: ""),
+         Model(image: "image 13", firstLabel: "Экран и яркость", secondLabel: ""),
+         Model(image: "image 14", firstLabel: "Экран Домой", secondLabel: "")]
     ]
 }
