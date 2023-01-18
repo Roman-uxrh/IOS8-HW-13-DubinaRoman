@@ -49,11 +49,23 @@ class ViewController: UIViewController {
             make.top.left.bottom.right.equalTo(view)
         }
     }
+    
+    // MARK: - Actions
+
+    @objc private func touchSwich(_ sender: UISwitch) {
+        let indexPathRow = sender.tag
+        print("Нажата ячейка в секции № 0, ячейка № \(indexPathRow)")
+    }
+    
 }
 
     // MARK: - TableView
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        44
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         model.count
@@ -71,6 +83,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let switchView = UISwitch(frame: .zero)
         switchView.setOn(false, animated: true)
+        switchView.addTarget(self, action: #selector(touchSwich), for: .valueChanged)
         switchView.tag = indexPath.row
         
         if indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 5) {
@@ -81,4 +94,17 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell ?? UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = DetailView()
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 5) {
+            // лена я не знаю что здесь написать (логика для перехода на новый экран) но вроде и так работает
+        } else {
+            viewController.model = model[indexPath.section][indexPath.row]
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
 }
+
