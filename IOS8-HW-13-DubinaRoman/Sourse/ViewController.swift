@@ -64,10 +64,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.nameID, for: indexPath) as? CustomTableViewCell
         cell?.model = model[indexPath.section][indexPath.row]
         cell?.imageIconRight.isHidden = model[indexPath.section][indexPath.row].update
-        cell?.accessoryType = .disclosureIndicator
+        
+        let switchView = UISwitch(frame: .zero)
+        switchView.setOn(false, animated: true)
+        switchView.tag = indexPath.row
+        
+        if indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 5) {
+            cell?.accessoryView = switchView
+        } else {
+            cell?.accessoryType = .disclosureIndicator
+        }
+        
         return cell ?? UITableViewCell()
     }
 }
