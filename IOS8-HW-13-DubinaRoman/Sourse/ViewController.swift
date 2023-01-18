@@ -10,7 +10,7 @@ import SnapKit
 
 class ViewController: UIViewController {
     
-    private var models: Model?
+    private var model = Model.mocks
     
     // MARK: - Outlets
     
@@ -26,8 +26,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Настройки"
-        navigationController?.navigationBar.prefersLargeTitles = true
         setupView()
         setupHierarchy()
         setupLayout()
@@ -36,6 +34,8 @@ class ViewController: UIViewController {
     // MARK: - Setups
     
     private func setupView() {
+        title = "Настройки"
+        navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
     }
     
@@ -49,25 +49,62 @@ class ViewController: UIViewController {
             make.top.left.bottom.right.equalTo(view)
         }
     }
+    
+    // MARK: - Actions
+
+    @objc private func touchSwich(_ sender: UISwitch) {
+        let indexPathRow = sender.tag
+        print("Нажата ячейка в секции № 0, ячейка № \(indexPathRow)")
+    }
+    
 }
 
     // MARK: - TableView
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        44
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        Model.model.count
+        model.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Model.model[section].count
+        model[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.nameID, for: indexPath) as? CustomTableViewCell
-        cell?.model = Model.model[indexPath.section][indexPath.row]
-        cell?.accessoryType = .disclosureIndicator
+        cell?.model = model[indexPath.section][indexPath.row]
+        cell?.imageIconRight.isHidden = model[indexPath.section][indexPath.row].update
+        
+        let switchView = UISwitch(frame: .zero)
+        switchView.setOn(false, animated: true)
+        switchView.addTarget(self, action: #selector(touchSwich), for: .valueChanged)
+        switchView.tag = indexPath.row
+        
+        if indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 5) {
+            cell?.accessoryView = switchView
+        } else {
+            cell?.accessoryType = .disclosureIndicator
+        }
+        
         return cell ?? UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = DetailView()
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 5) {
+            // лена я не знаю что здесь написать (логика для перехода на новый экран) но вроде и так работает
+        } else {
+            viewController.model = model[indexPath.section][indexPath.row]
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
 }
+
