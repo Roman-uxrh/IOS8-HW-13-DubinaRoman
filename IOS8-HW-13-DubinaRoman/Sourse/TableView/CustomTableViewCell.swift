@@ -77,7 +77,6 @@ final class CustomTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        
         imageIconLeft.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
             make.width.height.equalTo(32)
@@ -110,6 +109,8 @@ final class CustomTableViewCell: UITableViewCell {
         self.model = nil
     }
 }
+
+    // MARK: - Func
 
 func randomElement(array: [String]) -> String {
     array.randomElement() ?? ""

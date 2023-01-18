@@ -44,7 +44,6 @@ class ViewController: UIViewController {
     }
     
     private func setupLayout() {
-        
         tableView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalTo(view)
         }
